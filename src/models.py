@@ -15,8 +15,3 @@ class TokenResponse(BaseModel):
 
 class AnswerRequest(BaseModel):
     answer: Any
-
-
-class AnswerResponse(BaseModel):
-    code: int
-    msg: str
