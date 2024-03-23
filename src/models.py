@@ -20,4 +20,3 @@ class AnswerRequest(BaseModel):
 class AnswerResponse(BaseModel):
     code: int
     msg: str
-    note: str

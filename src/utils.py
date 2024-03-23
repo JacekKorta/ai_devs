@@ -1,3 +1,4 @@
+import json
 import pprint
 from typing import Any
 
@@ -29,9 +30,12 @@ def get_task(task_url: str) -> requests.Response:
 
 
 def send_answer(token: str, answer: Any) -> None:
+    headers = {"Content-type": "application/json"}
     answer_url = f"{settings.task_url}/answer/{token}"
     data = AnswerRequest(answer=answer)
-    res = requests.post(url=answer_url, data=data.model_dump_json())
+    res = requests.post(
+        url=answer_url, headers=headers, data=json.dumps(data.model_dump())
+    )
     res_obj = AnswerResponse(**res.json())
     print(res_obj.msg)  # todo: inny format
     print(res_obj.code)
