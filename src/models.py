@@ -1,3 +1,5 @@
+from typing import Any
+
 from pydantic import BaseModel
 
 
@@ -11,15 +13,8 @@ class TokenResponse(BaseModel):
     token: str
 
 
-# ten model jest zmienny
-class TaskResponse(BaseModel):
-    code: int
-    msg: str
-    cookie: str # to pole ni ejst stałe
-
-
 class AnswerRequest(BaseModel):
-    answer: str
+    answer: Any
 
 
 class AnswerResponse(BaseModel):
