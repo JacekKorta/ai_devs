@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Optional
 
 from openai import OpenAI
 from pydantic import BaseModel
@@ -16,8 +16,8 @@ client: OpenAI = OpenAI(api_key=settings.openai_api_key)
 class TaskResponse(BaseModel):
     code: int
     msg: str
-    x: Any
-    answer: Any
+    x: Optional[Any]
+    answer: Optional[Any]
 
     def set_answer(self):
         if is_flagged(self.x):
