@@ -1,0 +1,3 @@
+Wciel się w role senior PHP developera. Popraw powyższy kod tak aby zoptymalizować go pod względem czasu wykonania.
+Wszystkie potencjalne błędy powinny kończyć się zwróceniem 0. Rozważ użycie cashe dla wyników pośrednich.
+Jako input przyjmujemy tylko liczby całkowite. Na zły input też zwracamy 0
