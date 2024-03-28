@@ -1,0 +1,8 @@
+Opisz wiadomość od użytkownika jako JSON w następującej strukturze {"kategoria" : ??? (rodzaj sprzętu : pralka|telewizor|zmywarka) , "producent": ??? ("Nazwa producenta sprzetu", "akcja": ??? (Żądanie kleinta np. naprawa|zwrot), "data": ??? (dzisiejsza data w formacie YYYYMMDD)  }
+Zawsze trzymaj się ściśle formatu JSON w odpowiedzi
+WAŻNE tylko jeśli jesteś modelem GPT-4: JSON ma zawsze 4 klucze: "kategoria", :producent", "akcja", "data"
+FAKT: dzisiejsza data to 20240328
+
+
+USER:
+WAŻNE: nie dodawaj daty w odpowiedzi!
