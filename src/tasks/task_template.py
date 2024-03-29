@@ -16,8 +16,8 @@ client: OpenAI = OpenAI(api_key=settings.openai_api_key)
 class TaskResponse(BaseModel):
     code: int
     msg: str
-    x: Optional[Any]
-    answer: Optional[Any]
+    x: Optional[Any] = None
+    answer: Optional[Any] = None
 
     def set_answer(self):
         if is_flagged(self.x):
