@@ -1,9 +1,9 @@
 import time
-from typing import Optional, List, Dict
+from pprint import pprint
+from typing import Dict, List, Optional
 
 from openai import OpenAI
 from pydantic import BaseModel
-from pprint import pprint
 
 from src import utils
 from src.exceptions import StoppedByModeration
@@ -20,17 +20,13 @@ MESSAGES = [
     {
         "role": "system",
         "content": "Wciel się w role uczestnika teleturnieju. W kolejnych wiadomościach ode mnie będziesz "
-                   "dostawał informacje o pewnej postaci. Twoim zadaniem jest odgadnięcie kim jest ta postać. "
-                   "Wygrasz jeśli zgadniesz, ale przegrasz jeśli podasz nieprawidłowa odpowiedź. "
-                   f"Jeśli nie jesteś pewien kto to, powiedz: '{NO_ANSWER_KEY}' i nic więcej.\n "
-                   "Jeśli jesteś pewien kto to: Podaj jego imie i nazwisko.\n"
-
-                   "\nPotwierdź ze zrozumiałeś pisząc '...' i nic więcej"
+        "dostawał informacje o pewnej postaci. Twoim zadaniem jest odgadnięcie kim jest ta postać. "
+        "Wygrasz jeśli zgadniesz, ale przegrasz jeśli podasz nieprawidłowa odpowiedź. "
+        f"Jeśli nie jesteś pewien kto to, powiedz: '{NO_ANSWER_KEY}' i nic więcej.\n "
+        "Jeśli jesteś pewien kto to: Podaj jego imie i nazwisko.\n"
+        "\nPotwierdź ze zrozumiałeś pisząc '...' i nic więcej",
     },
-    {
-        "role": "assistant",
-        "content": "..."
-    },
+    {"role": "assistant", "content": "..."},
 ]
 
 
@@ -43,9 +39,7 @@ class TaskResponse(BaseModel):
 
 def get_answer_from_model(current_messages: List[dict]) -> str:
     response = client.chat.completions.create(
-        temperature=0.3,
-        model="gpt-3.5-turbo",
-        messages=current_messages
+        temperature=0.3, model="gpt-3.5-turbo", messages=current_messages
     )
     return response.choices[0].message.content
 
