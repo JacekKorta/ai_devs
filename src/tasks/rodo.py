@@ -32,5 +32,5 @@ def solve(task_name: str) -> None:
 
 
 if __name__ == "__main__":
-    # utils.print_task(TASK_NAME)
-    solve(TASK_NAME)
+    utils.print_task(TASK_NAME)
+    # solve(TASK_NAME)
