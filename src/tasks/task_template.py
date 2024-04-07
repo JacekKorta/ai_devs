@@ -17,10 +17,10 @@ class TaskResponse(BaseModel):
     code: int
     msg: str
     x: Optional[Any] = None
-    answer: Optional[Any] = None
+    answer: Optional[str] = None
 
     def set_answer(self):
-        if is_flagged(self.x):
+        if is_flagged([self.x]):
             raise StoppedByModeration(self.x)
 
 
