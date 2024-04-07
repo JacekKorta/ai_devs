@@ -9,6 +9,7 @@ class Settings(BaseSettings):
     api_key: str
     task_url: str
     openai_api_key: str
+    qdrant_url: str
 
 
 @lru_cache()

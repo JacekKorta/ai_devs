@@ -12,6 +12,11 @@ python-dotenv = "^1.0.1"
 pydantic-settings = "^2.2.1"
 requests = "^2.31.0"
 openai = "^1.14.2"
+qdrant-client = "^1.8.2"
+langchain = "^0.1.14"
+jq = "^1.7.0"
+tiktoken = "^0.6.0"
+langchain-openai = "^0.1.1"
 
 
 [tool.poetry.group.dev.dependencies]
