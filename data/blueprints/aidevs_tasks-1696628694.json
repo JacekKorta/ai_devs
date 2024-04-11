@@ -1,0 +1,633 @@
+{
+    "name": "[AI_Devs] Enrich Tasks",
+    "flow": [
+        {
+            "id": 3,
+            "module": "todoist:NewEvent",
+            "version": 2,
+            "parameters": {
+                "__IMTHOOK__": 1115387
+            },
+            "mapper": {},
+            "metadata": {
+                "designer": {
+                    "x": 0,
+                    "y": 0,
+                    "name": "Watcher"
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTHOOK__": {
+                            "data": {
+                                "editable": "false"
+                            },
+                            "label": "My todoist-item webhook"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTHOOK__",
+                        "type": "hook:todoist-item",
+                        "label": "Webhook",
+                        "required": true
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "event",
+                        "type": "text",
+                        "label": "Event"
+                    },
+                    {
+                        "name": "userId",
+                        "type": "text",
+                        "label": "User ID"
+                    },
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "Task ID"
+                    },
+                    {
+                        "name": "deleted",
+                        "type": "boolean",
+                        "label": "Deleted"
+                    },
+                    {
+                        "name": "collapsed",
+                        "type": "boolean",
+                        "label": "Collapsed"
+                    },
+                    {
+                        "name": "archived",
+                        "type": "boolean",
+                        "label": "Archived"
+                    },
+                    {
+                        "name": "syncId",
+                        "type": "text",
+                        "label": "Sync ID"
+                    },
+                    {
+                        "name": "description",
+                        "type": "text",
+                        "label": "Description"
+                    },
+                    {
+                        "name": "initiator",
+                        "spec": [
+                            {
+                                "name": "id",
+                                "type": "text",
+                                "label": "Initiator ID"
+                            },
+                            {
+                                "name": "fullName",
+                                "type": "text",
+                                "label": "Full name"
+                            },
+                            {
+                                "name": "email",
+                                "type": "email",
+                                "label": "Email"
+                            },
+                            {
+                                "name": "premium",
+                                "type": "boolean",
+                                "label": "Premium"
+                            },
+                            {
+                                "name": "imageId",
+                                "type": "uinteger",
+                                "label": "Image ID"
+                            }
+                        ],
+                        "type": "collection",
+                        "label": "Initiator"
+                    },
+                    {
+                        "name": "name",
+                        "type": "text",
+                        "label": "Project Name"
+                    },
+                    {
+                        "name": "parentId",
+                        "type": "text",
+                        "label": "Parent Project ID"
+                    },
+                    {
+                        "name": "projectId",
+                        "type": "text",
+                        "label": "Project ID"
+                    },
+                    {
+                        "name": "childOrder",
+                        "type": "uinteger",
+                        "label": "Child Order"
+                    },
+                    {
+                        "name": "content",
+                        "type": "text",
+                        "label": "Content"
+                    },
+                    {
+                        "name": "priority",
+                        "type": "number",
+                        "label": "Priority"
+                    },
+                    {
+                        "name": "labels",
+                        "type": "array",
+                        "label": "Labels"
+                    },
+                    {
+                        "name": "completed",
+                        "type": "boolean",
+                        "label": "Completed"
+                    },
+                    {
+                        "name": "idAssigned",
+                        "type": "text",
+                        "label": "Assigned ID"
+                    },
+                    {
+                        "name": "idResponsible",
+                        "type": "text",
+                        "label": "Responsible ID"
+                    },
+                    {
+                        "name": "url",
+                        "type": "url",
+                        "label": "URL"
+                    },
+                    {
+                        "name": "dateAdded",
+                        "type": "date",
+                        "label": "Date Added"
+                    },
+                    {
+                        "name": "dateDue",
+                        "type": "date",
+                        "label": "Date Due"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "module": "todoist:ListProjects",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 395779
+            },
+            "mapper": {
+                "limit": "5"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 300,
+                    "y": 0,
+                    "name": "Project"
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "label": "adam@overment.com",
+                            "data": {
+                                "scoped": "true",
+                                "connection": "todoist"
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:todoist",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "limit",
+                        "type": "uinteger",
+                        "label": "Limit",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        {
+            "id": 8,
+            "module": "util:TextAggregator",
+            "version": 1,
+            "parameters": {
+                "rowSeparator": "other",
+                "otherRowSeparator": "\\n\\n\\n",
+                "feeder": 5
+            },
+            "mapper": {
+                "value": "{{5.name}} ({{5.id}})"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 600,
+                    "y": 0,
+                    "name": "Projects"
+                },
+                "restore": {
+                    "parameters": {
+                        "rowSeparator": {
+                            "label": "Other"
+                        }
+                    },
+                    "extra": {
+                        "feeder": {
+                            "label": "Project - List Projects [5]"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "rowSeparator",
+                        "type": "select",
+                        "label": "Row separator",
+                        "validate": {
+                            "enum": [
+                                "\n",
+                                "\t",
+                                "other"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "otherRowSeparator",
+                        "type": "text",
+                        "label": "Separator"
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "value",
+                        "type": "text",
+                        "label": "Text"
+                    }
+                ],
+                "advanced": true
+            }
+        },
+        {
+            "id": 4,
+            "module": "openai-gpt-3:transformTextToStructuredData",
+            "version": 1,
+            "parameters": {
+                "__IMTCONN__": 2054683
+            },
+            "mapper": {
+                "model": "gpt-4-0613",
+                "rawText": "Task: {{3.content}}\nEvent: {{3.event}}",
+                "prompt": "Classify the Task from the Todoist event, to the category and return its ID.\n\nNote: some activities may be the same in a different categories (like writings) and in such cases the topic has to be considered to classify them correctly. \n\n### categories\noverment: youtube channel activities. This is a default category\neduweb: online courses related to the design & tech, live events, Ahoy! Community, newsletters, publications, course recordings and writings\neasy_: selling digital products, newsletters, publications, recordings and writings related to the topic\n### IDs\n{{8.text}}\n###",
+                "parameters": [
+                    {
+                        "name": "project_id",
+                        "description": "ID of the project / category",
+                        "type": "number",
+                        "isRequired": true
+                    }
+                ]
+            },
+            "metadata": {
+                "designer": {
+                    "x": 900,
+                    "y": 0,
+                    "name": "Describe"
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "label": "OpenAI",
+                            "data": {
+                                "scoped": "true",
+                                "connection": "openai-gpt-3"
+                            }
+                        }
+                    },
+                    "expect": {
+                        "model": {
+                            "mode": "chose",
+                            "label": "gpt-4-0613"
+                        },
+                        "parameters": {
+                            "mode": "chose",
+                            "items": [
+                                {
+                                    "type": {
+                                        "mode": "chose",
+                                        "label": "Number"
+                                    },
+                                    "isRequired": {
+                                        "mode": "chose"
+                                    },
+                                    "valueExamples": {
+                                        "mode": "chose"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:openai-gpt-3",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "model",
+                        "type": "select",
+                        "label": "Model",
+                        "required": true
+                    },
+                    {
+                        "name": "rawText",
+                        "type": "text",
+                        "label": "Text to Parse",
+                        "required": true
+                    },
+                    {
+                        "name": "prompt",
+                        "type": "text",
+                        "label": "Prompt",
+                        "required": true
+                    },
+                    {
+                        "name": "parameters",
+                        "type": "array",
+                        "label": "Structured Data Definition",
+                        "required": true,
+                        "spec": [
+                            {
+                                "name": "name",
+                                "label": "Parameter Name",
+                                "type": "text",
+                                "required": true,
+                                "validate": {
+                                    "pattern": "^[a-zA-Z_$][a-zA-Z_$0-9]*$"
+                                }
+                            },
+                            {
+                                "name": "description",
+                                "label": "Description",
+                                "type": "text",
+                                "required": true
+                            },
+                            {
+                                "name": "type",
+                                "label": "Data Type",
+                                "type": "select",
+                                "required": true,
+                                "options": [
+                                    {
+                                        "label": "Text",
+                                        "value": "string",
+                                        "nested": [
+                                            {
+                                                "name": "valueExamples",
+                                                "label": "Value Examples",
+                                                "type": "array",
+                                                "spec": {
+                                                    "type": "text"
+                                                },
+                                                "help": "Provide one or more examples of a possible value for this parameter. The more examples you provide the more accurate the output is going to be."
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "label": "Number",
+                                        "value": "number",
+                                        "nested": [
+                                            {
+                                                "name": "valueExamples",
+                                                "label": "Value Examples",
+                                                "type": "array",
+                                                "spec": {
+                                                    "type": "number"
+                                                },
+                                                "help": "Provide one or more examples of a possible value for this parameter. The more examples you provide the more accurate the output is going to be."
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "label": "Array (text)",
+                                        "value": "arrayString"
+                                    },
+                                    {
+                                        "label": "Array (numbers)",
+                                        "value": "arrayNumber"
+                                    },
+                                    {
+                                        "label": "Array (boolean)",
+                                        "value": "arrayBoolean"
+                                    },
+                                    {
+                                        "label": "Boolean",
+                                        "value": "boolean"
+                                    },
+                                    {
+                                        "label": "Object",
+                                        "value": "object",
+                                        "nested": [
+                                            {
+                                                "name": "properties",
+                                                "label": "Properties",
+                                                "type": "array",
+                                                "spec": [
+                                                    {
+                                                        "name": "name",
+                                                        "label": "Parameter Name",
+                                                        "type": "text",
+                                                        "required": true,
+                                                        "help": "The parameter's name.\n1. The first character must either be alphabet or underscore. It should not start with the digit.\n2. No commas and blanks are allowed.\n3. No special symbols other than underscore are allowed.",
+                                                        "validate": {
+                                                            "pattern": "^[a-zA-Z_$][a-zA-Z_$0-9]*$"
+                                                        }
+                                                    },
+                                                    {
+                                                        "name": "description",
+                                                        "label": "Description",
+                                                        "type": "text",
+                                                        "required": true,
+                                                        "help": "Brief description of the parameter. For example, `Latitude and Longitude of the location.` in case you want to specify that AI should search for coordinates in the provided text."
+                                                    },
+                                                    {
+                                                        "name": "type",
+                                                        "label": "Data Type",
+                                                        "type": "select",
+                                                        "required": true,
+                                                        "options": [
+                                                            {
+                                                                "label": "Text",
+                                                                "value": "string",
+                                                                "nested": [
+                                                                    {
+                                                                        "name": "valueExamples",
+                                                                        "label": "Value Examples",
+                                                                        "type": "array",
+                                                                        "spec": {
+                                                                            "type": "text"
+                                                                        },
+                                                                        "help": "Provide one or more examples of a possible value for this parameter. The more examples you provide the more accurate the output is going to be."
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "label": "Number",
+                                                                "value": "number",
+                                                                "nested": [
+                                                                    {
+                                                                        "name": "valueExamples",
+                                                                        "label": "Value Examples",
+                                                                        "type": "array",
+                                                                        "spec": {
+                                                                            "type": "number"
+                                                                        },
+                                                                        "help": "Provide one or more examples of a possible value for this parameter. The more examples you provide the more accurate the output is going to be."
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "label": "Array (text)",
+                                                                "value": "arrayString"
+                                                            },
+                                                            {
+                                                                "label": "Array (numbers)",
+                                                                "value": "arrayNumber"
+                                                            },
+                                                            {
+                                                                "label": "Array (boolean)",
+                                                                "value": "arrayBoolean"
+                                                            },
+                                                            {
+                                                                "label": "Boolean",
+                                                                "value": "boolean"
+                                                            }
+                                                        ],
+                                                        "help": "An appropriate data type of the parameter. Array should be used when multiple occurences of similar data type may take a place.\nFor example, use Array (text) type for text where coordinates of multiple locations are mentioned and you would like them to be extracted."
+                                                    },
+                                                    {
+                                                        "name": "isRequired",
+                                                        "label": "Is Parameter Required?",
+                                                        "type": "boolean",
+                                                        "required": true,
+                                                        "help": "If this is set to `Yes` AI will be forced to generate a value in the output even if there's no such a value detected in the text."
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "isRequired",
+                                "label": "Is Parameter Required?",
+                                "type": "boolean",
+                                "required": true
+                            }
+                        ]
+                    }
+                ],
+                "interface": [
+                    {
+                        "name": "project_id",
+                        "type": "number"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 7,
+            "module": "todoist:MoveItem",
+            "version": 2,
+            "parameters": {
+                "__IMTCONN__": 2183797
+            },
+            "mapper": {
+                "id": "{{3.id}}",
+                "project_id": "{{4.project_id}}"
+            },
+            "metadata": {
+                "designer": {
+                    "x": 1200,
+                    "y": 0,
+                    "name": "Move"
+                },
+                "restore": {
+                    "parameters": {
+                        "__IMTCONN__": {
+                            "label": "AI_Devs",
+                            "data": {
+                                "scoped": "true",
+                                "connection": "todoist"
+                            }
+                        }
+                    },
+                    "expect": {
+                        "project_id": {
+                            "mode": "edit"
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "__IMTCONN__",
+                        "type": "account:todoist",
+                        "label": "Connection",
+                        "required": true
+                    }
+                ],
+                "expect": [
+                    {
+                        "name": "id",
+                        "type": "text",
+                        "label": "Task ID",
+                        "required": true
+                    },
+                    {
+                        "name": "project_id",
+                        "type": "select",
+                        "label": "Project"
+                    },
+                    {
+                        "name": "parent_id",
+                        "type": "text",
+                        "label": "Parent ID"
+                    }
+                ]
+            }
+        }
+    ],
+    "metadata": {
+        "instant": true,
+        "version": 1,
+        "scenario": {
+            "roundtrips": 1,
+            "maxErrors": 3,
+            "autoCommit": true,
+            "autoCommitTriggerLast": true,
+            "sequential": false,
+            "confidential": false,
+            "dataloss": false,
+            "dlq": false,
+            "freshVariables": false
+        },
+        "designer": {
+            "orphans": []
+        },
+        "zone": "eu1.make.com"
+    }
+}
