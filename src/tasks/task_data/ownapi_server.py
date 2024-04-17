@@ -47,10 +47,23 @@ class AnswerResponse(BaseModel):
     reply: str
 
 
+db = []
+
+
 @app.post("/")
 def answer(question: QuestionRequest):
     logger.info(question.json())
-    messages = [{"role": "user", "content": question.question}]
+    db.append(question)
+    messages = []
+    if db:
+        messages.append(
+            {
+                "role": "system",
+                "content": f"if it possible, to answer use this context: {db}",
+            }
+        )
+
+    messages.append({"role": "user", "content": question.question})
     response = client.chat.completions.create(
         model="gpt-3.5-turbo-0125",
         messages=messages,
