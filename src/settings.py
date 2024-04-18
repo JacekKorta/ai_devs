@@ -11,6 +11,7 @@ class Settings(BaseSettings):
     openai_api_key: str
     qdrant_url: str
     own_api_url: str
+    renderform_api_key: str
 
 
 @lru_cache()
