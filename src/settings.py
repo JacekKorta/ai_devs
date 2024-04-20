@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     qdrant_url: str
     own_api_url: str
     renderform_api_key: str
+    serp_api_key: str
 
 
 @lru_cache()
